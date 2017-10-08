@@ -6,6 +6,7 @@ import shutil
 import smtplib
 import stat
 import getpass
+from email.mime.text import MIMEText
 
 class submit:
 
@@ -13,7 +14,6 @@ class submit:
 
 		self._target = input("Please enter the name of the file you want to submitted.\n")
 		self._email = input("Please enter your email address for a receipt. \n")
-		self._emailps = getpass.getpass("Please enter the password of your email address. \n")
 
 	def submitWork(self): 
 
@@ -38,20 +38,20 @@ class submit:
 
 	def email(self):
 
-		message = """From: From Person <from@fromdomain.com>
-		To: To Person <to@todomain.com>
-		Subject: SMTP e-mail test
+		msg = MIMEText("You submiited file {} sussfully, please do not reply to this email!".format(self._target))
 
-		This is a test e-mail message.
-		"""
+		# me == the sender's email address
+		# you == the recipient's email address
+		msg['Subject'] = 'DoNotReply Submission Successfully'
+		msg['From'] = 'THISISFAKESENDER'
+		msg['To'] = self._email
 
-		try:
-		   smtpObj = smtplib.SMTP("localhost")
-		   smtpObj.login(self._email,self._emailps)
-		   smtpObj.sendmail(self._email, self._email, message)         
-		   print("Successfully sent email.")
-		except smtplib.SMTPException:
-		   print("Error: unable to send email.")
+		# Send the message via our own SMTP server, but don't include the
+		# envelope header.
+		s = smtplib.SMTP('localhost')
+		s.send_message(msg)
+		s.quit()
+
 			
 
 def main():

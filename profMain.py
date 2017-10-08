@@ -36,7 +36,9 @@ class workManager:
 
 		print("Please enter the file name you wish to use.")
 		self.displayFile()
-		filename = input(">>")
+		filename = input(">> ")
+		email = input("Please enter your email for email servies.\n ")
+		
 		destination = os.getcwd() + "/{}".format(filename)
 		shutil.copyfile("os.py","submit.py")
 		currentPath = os.getcwd() + "/submit.py"
@@ -47,10 +49,11 @@ class workManager:
 		destination = destination + "/submit.py"
 
 		fakePath = "THiSISFAKEPATH"
+		fakeSender = "THISISFAKESENDER"
 
 		with fileinput.FileInput("submit.py", inplace=True) as file:
 			for line in file:
-				print(line.replace(fakePath,destination), end='')
+				print(line.replace(fakePath,destination).replace(fakeSender,email), end='')
 
 		currentPath = os.getcwd() + "/submit.py"
 
