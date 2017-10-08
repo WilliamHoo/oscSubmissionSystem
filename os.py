@@ -13,7 +13,7 @@ class submit:
 	def instruct(self):
 
 		self._target = input("Please enter the name of the file you want to submitted.\n")
-		self._email = input("Please enter your email address for a receipt. \n")
+		self._email = input("Please enter your email address for a receipt.\n")
 
 	def submitWork(self): 
 

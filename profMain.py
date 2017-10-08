@@ -37,7 +37,7 @@ class workManager:
 		print("Please enter the file name you wish to use.")
 		self.displayFile()
 		filename = input(">> ")
-		email = input("Please enter your email for email servies.\n ")
+		email = input("Please enter your email for email servies.\n")
 		
 		destination = os.getcwd() + "/{}".format(filename)
 		shutil.copyfile("os.py","submit.py")
